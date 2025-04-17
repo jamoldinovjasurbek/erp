@@ -5,7 +5,7 @@ const studentSchema = new mongoose.Schema(
     first_name: { type: String, required: true },
     last_name: { type: String, required: true },
     username: { type: String, unique: true },
-    password:String,
+    password: String,
     phone: String,
     address: String,
     birth_date: Date,

@@ -1,4 +1,3 @@
-
 import "dotenv/config";
 import bcrypt from "bcrypt";
 import { Staff } from "../models/staff.model.js";
@@ -18,7 +17,7 @@ const createSuperAdmin = async () => {
       first_name: process.env.SUPERADMIN_FIRSTNAME,
       last_name: process.env.SUPERADMIN_LASTNAME,
       username: process.env.SUPERADMIN_USERNAME,
-      password:hashedPassword,
+      password: hashedPassword,
       role: "superadmin",
       position: "Super admin",
       phone: "+998999999009",

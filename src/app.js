@@ -3,17 +3,19 @@ import "dotenv/config.js";
 import connectDB from "./config/db.js";
 import Routes from "./routes/routes.js";
 import createSuperAdmin from "./script/create.Superadmin.js";
+import ErrorMiddleware from "./middleware/error.middleware.js";
 const PORT = process.env.PORT || 8080;
 
 const app = express();
-app.use(express.json())
+app.use(express.json());
 
-app.use("/api",Routes())
+app.use("/api", Routes());
+app.use(ErrorMiddleware);
 
 const initApp = async () => {
   try {
     await connectDB();
-    await createSuperAdmin()
+    await createSuperAdmin();
     app.listen(PORT, () => {
       console.log("server is running at port:", PORT);
     });

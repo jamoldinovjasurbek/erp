@@ -24,4 +24,4 @@ const scheduleSchema = new mongoose.Schema(
 
 scheduleSchema.index({ group_id: 1, day: 1, start_time: 1 }, { unique: true });
 
-export const Schedule= mongoose.model("Schedule", scheduleSchema);
+export const Schedule = mongoose.model("Schedule", scheduleSchema);

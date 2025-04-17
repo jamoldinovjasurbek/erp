@@ -6,20 +6,20 @@ class StaffService {
   async createStaff(data) {
     try {
       const exist = await Staff.findOne({ username: data.username });
-      
+
       if (exist) {
         throw new CustomError("Username already exists", 400);
       }
 
       const hashedPassword = await bcrypt.hash(data.password, 10);
-      data.password=hashedPassword
+      data.password = hashedPassword;
       const staff = await Staff.create(data);
 
       return {
-       staff
+        staff,
       };
     } catch (error) {
-      throw new CustomError(error.message,500)
+      throw new CustomError(error.message, 500);
     }
   }
 
@@ -27,8 +27,7 @@ class StaffService {
     const staffs = await Staff.find();
     const count = await Staff.countDocuments();
 
-   
-    return {staffs,count}
+    return { staffs, count };
   }
 }
 

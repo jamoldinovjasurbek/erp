@@ -4,25 +4,25 @@ export class AuthController {
   constructor() {
     this.authService = new AuthService();
   }
-  async loginStaff(req, res) {
+  async loginStaff(req, res, next) {
     try {
       const { username, password } = req.body;
       console.log(req.body);
-      
+
       const result = await this.authService.loginStaff(username, password);
       res.json({ success: true, ...result });
-    } catch (err) {
-      res.status(401).json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
 
-  async loginStudent(req, res) {
+  async loginStudent(req, res, next) {
     try {
       const { username, password } = req.body;
       const result = await this.authService.loginStudent(username, password);
       res.json({ success: true, ...result });
-    } catch (err) {
-      res.status(401).json({ success: false, message: err.message });
+    } catch (error) {
+      next(error);
     }
   }
 
@@ -30,8 +30,8 @@ export class AuthController {
     try {
       const staff = await this.authService.registerStaff(req.body);
       res.status(201).json({ message: "Staff created", staff });
-    } catch (err) {
-      next(err);
+    } catch (error) {
+      next(error);
     }
   }
 
@@ -39,8 +39,8 @@ export class AuthController {
     try {
       const student = await this.authService.registerStudent(req.body);
       res.status(201).json({ message: "Student created", student });
-    } catch (err) {
-      next(err);
+    } catch (error) {
+      next(error);
     }
   }
 }

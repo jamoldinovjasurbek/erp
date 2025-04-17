@@ -15,4 +15,7 @@ attendanceDetailSchema.index(
   { unique: true }
 );
 
-export const AttendanceDetail=  mongoose.model("AttendanceDetail", attendanceDetailSchema);
+export const AttendanceDetail = mongoose.model(
+  "AttendanceDetail",
+  attendanceDetailSchema
+);

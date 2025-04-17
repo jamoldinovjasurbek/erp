@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const groupSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
+    name: { type: String, required: true, unique: true },
     course_id: { type: mongoose.Schema.Types.ObjectId, ref: "Course" },
     teacher_id: { type: mongoose.Schema.Types.ObjectId, ref: "Teacher" },
     start_date: { type: Date, required: true },
@@ -18,4 +18,4 @@ const groupSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const Group= mongoose.model("Group", groupSchema);
+export const Group = mongoose.model("Group", groupSchema);

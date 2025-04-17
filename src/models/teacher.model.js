@@ -2,14 +2,23 @@ import mongoose from "mongoose";
 
 const teacherSchema = new mongoose.Schema(
   {
-    staff_id: {
+    staffId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Staff",
       required: true,
     },
-    expertise: String,
-    bio: String,
-    languages: [String],
+    specialization: {
+      type: String,
+      required: true,
+    },
+    education: {
+      type: String,
+      required: true,
+    },
+    experience: {
+      type: Number,
+      required: true,
+    },
   },
   { timestamps: true }
 );

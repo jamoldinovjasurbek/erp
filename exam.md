@@ -3,6 +3,7 @@
 ## Ma'lumotlar bazasi strukturasi (PostgreSQL jadvallar)
 
 ### 1. Staffs (Xodimlar)
+
 ```sql
 CREATE TABLE staffs (
   id SERIAL PRIMARY KEY,
@@ -22,6 +23,7 @@ CREATE TABLE staffs (
 ```
 
 ### 2. Students (O'quvchilar)
+
 ```sql
 CREATE TABLE students (
   id SERIAL PRIMARY KEY,
@@ -40,6 +42,7 @@ CREATE TABLE students (
 ```
 
 ### 3. Courses (Kurslar)
+
 ```sql
 CREATE TABLE courses (
   id SERIAL PRIMARY KEY,
@@ -55,6 +58,7 @@ CREATE TABLE courses (
 ```
 
 ### 4. Groups (Guruhlar)
+
 ```sql
 CREATE TABLE groups (
   id SERIAL PRIMARY KEY,
@@ -72,6 +76,7 @@ CREATE TABLE groups (
 ```
 
 ### 5. Student_Groups (O'quvchilar va Guruhlar bog'lanishi)
+
 ```sql
 CREATE TABLE student_groups (
   id SERIAL PRIMARY KEY,
@@ -86,6 +91,7 @@ CREATE TABLE student_groups (
 ```
 
 ### 6. Lessons (Darslar)
+
 ```sql
 CREATE TABLE lessons (
   id SERIAL PRIMARY KEY,
@@ -103,6 +109,7 @@ CREATE TABLE lessons (
 ```
 
 ### 7. Attendance (Davomat)
+
 ```sql
 CREATE TABLE attendance (
   id SERIAL PRIMARY KEY,
@@ -123,6 +130,7 @@ CREATE TABLE attendance_details (
 ```
 
 ### 9. Payments (To'lovlar)
+
 ```sql
 CREATE TABLE payments (
   id SERIAL PRIMARY KEY,
@@ -140,6 +148,7 @@ CREATE TABLE payments (
 ```
 
 ### 10. Schedule (Dars jadvali)
+
 ```sql
 CREATE TABLE schedule (
   id SERIAL PRIMARY KEY,
@@ -166,7 +175,9 @@ CREATE TABLE schedule (
 ### 1. Authentication
 
 #### Xodim sifatida tizimga kirish
+
 **POST /api/auth/staff/login**
+
 - Body:
   ```json
   {
@@ -191,7 +202,9 @@ CREATE TABLE schedule (
   ```
 
 #### O'quvchi sifatida tizimga kirish
+
 **POST /api/auth/student/login**
+
 - Body:
   ```json
   {
@@ -216,12 +229,14 @@ CREATE TABLE schedule (
 ### 2. Staffs
 
 #### Yangi xodim yaratish
+
 **POST /api/staffs** (SuperAdmin, Admin)
+
 - Headers: Authorization: Bearer {token}
 - Body:
   ```json
   {
-    "firstName": "Mansur",
+   "firstName": "Mansur",
     "lastName": "Karimov",
     "username": "mansur",
     "password": "password123",
@@ -250,7 +265,9 @@ CREATE TABLE schedule (
   ```
 
 #### Barcha xodimlarni olish
+
 **GET /api/staffs** (SuperAdmin, Admin)
+
 - Headers: Authorization: Bearer {token}
 - Response (200):
   ```json
@@ -267,7 +284,7 @@ CREATE TABLE schedule (
         "position": "O'qituvchi",
         "phone": "+998901234567",
         "hireDate": "2025-04-13"
-      },
+      }
     ]
   }
   ```
@@ -275,7 +292,9 @@ CREATE TABLE schedule (
 ### 3. Students
 
 #### Yangi o'quvchi yaratish
+
 **POST /api/students** (Admin)
+
 - Headers: Authorization: Bearer {token}
 - Body:
   ```json
@@ -307,7 +326,9 @@ CREATE TABLE schedule (
   ```
 
 #### Barcha o'quvchilarni olish
+
 **GET /api/students** (Admin, Teacher)
+
 - Headers: Authorization: Bearer {token}
 - Response (200):
   ```json
@@ -322,7 +343,7 @@ CREATE TABLE schedule (
         "username": "aziz",
         "phone": "+998901234567",
         "enrollmentDate": "2025-04-13"
-      },
+      }
     ]
   }
   ```
@@ -330,7 +351,9 @@ CREATE TABLE schedule (
 ### 4. Teachers
 
 #### Yangi o'qituvchi yaratish
+
 **POST /api/teachers** (Admin)
+
 - Headers: Authorization: Bearer {token}
 - Body:
   ```json
@@ -362,7 +385,9 @@ CREATE TABLE schedule (
 ### 5. Courses
 
 #### Yangi kurs yaratish
+
 **POST /api/courses** (Admin)
+
 - Headers: Authorization: Bearer {token}
 - Body:
   ```json
@@ -373,6 +398,7 @@ CREATE TABLE schedule (
     "duration": 3,
     "level": "intermediate"
   }
+  
   ```
 - Response (201):
   ```json
@@ -393,7 +419,9 @@ CREATE TABLE schedule (
 ### 6. Groups
 
 #### Yangi guruh yaratish
+
 **POST /api/groups** (Admin)
+
 - Headers: Authorization: Bearer {token}
 - Body:
   ```json
@@ -435,7 +463,9 @@ CREATE TABLE schedule (
 ### 7. Lessons
 
 #### Yangi dars yaratish
+
 **POST /api/lessons** (Admin, Teacher)
+
 - Headers: Authorization: Bearer {token}
 - Body:
   ```json
@@ -470,7 +500,9 @@ CREATE TABLE schedule (
   ```
 
 #### Guruh darslarini olish
+
 **GET /api/groups/:groupId/lessons** (Admin, Teacher, Student)
+
 - Headers: Authorization: Bearer {token}
 - Query: ?startDate=2025-05-01&endDate=2025-05-31
 - Response (200):
@@ -492,7 +524,7 @@ CREATE TABLE schedule (
           "absent": 2,
           "late": 1
         }
-      },
+      }
       // ...boshqa darslar
     ]
   }
@@ -501,7 +533,9 @@ CREATE TABLE schedule (
 ### 8. Attendance
 
 #### Davomat kiritish
+
 **POST /api/lessons/:lessonId/attendance** (Admin, Teacher)
+
 - Headers: Authorization: Bearer {token}
 - Body:
   ```json
@@ -543,7 +577,9 @@ CREATE TABLE schedule (
   ```
 
 #### Dars davomatini olish
+
 **GET /api/lessons/:lessonId/attendance** (Admin, Teacher, Student)
+
 - Headers: Authorization: Bearer {token}
 - Response (200):
   ```json
@@ -597,7 +633,9 @@ CREATE TABLE schedule (
   ```
 
 #### O'quvchi davomatini olish
+
 **GET /api/students/:studentId/attendance** (Admin, Teacher, Student)
+
 - Headers: Authorization: Bearer {token}
 - Query: ?startDate=2025-05-01&endDate=2025-05-31&groupId=group_id
 - Response (200):
@@ -650,7 +688,9 @@ CREATE TABLE schedule (
 ### 9. Payments
 
 #### To'lov kiritish
+
 **POST /api/payments** (Admin)
+
 - Headers: Authorization: Bearer {token}
 - Body:
   ```json
@@ -691,6 +731,7 @@ CREATE TABLE schedule (
 Barcha API endpointlari (umummiy endpointlar bundan mustasno) JWT token orqali autentifikatsiya va avtorizatsiya qilinadi. Token HTTP headerda "Authorization: Bearer {token}" ko'rinishida yuboriladi.
 
 ### Middleware funksiyalari:
+
 - `auth` - Foydalanuvchini token orqali tekshiradi
 - `authorize` - Foydalanuvchi rollarini tekshiradi (SuperAdmin, Admin, Teacher, Student)
 

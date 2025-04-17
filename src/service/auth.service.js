@@ -6,7 +6,7 @@ import JwtService from "./jwt.service.js";
 export class AuthService {
   constructor() {
     this.jwtService = new JwtService();
-    this.staff = Staff
+    this.staff = Staff;
   }
   async loginStaff(username, password) {
     const staff = await this.staff.findOne({ username });
@@ -15,7 +15,7 @@ export class AuthService {
     const isMatch = await bcrypt.compare(password, staff.password);
     if (!isMatch) throw new Error("Invalid credentials");
 
-    const token = this.jwtService.generateTokenStaff(staff.id,staff.role);
+    const token = this.jwtService.generateTokenStaff(staff.id, staff.role);
 
     return {
       token,

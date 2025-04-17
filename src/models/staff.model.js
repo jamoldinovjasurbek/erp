@@ -8,7 +8,7 @@ const staffSchema = new mongoose.Schema(
     password: { type: String, required: true },
     role: {
       type: String,
-      enum: [ "admin", "teacher"],
+      enum: ["admin", "teacher"],
       required: true,
     },
     position: { type: String, required: true },
@@ -20,4 +20,4 @@ const staffSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const Staff= mongoose.model("Staff", staffSchema);
+export const Staff = mongoose.model("Staff", staffSchema);
