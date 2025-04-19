@@ -10,6 +10,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/api", Routes());
+
 app.use(ErrorMiddleware);
 
 const initApp = async () => {

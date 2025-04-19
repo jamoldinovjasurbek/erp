@@ -12,5 +12,30 @@ class LessonController {
       next(error);
     }
   }
+  async getLessonsByGroup(req, res, next) {
+    try {
+      const { groupId } = req.params;
+      const { startDate, endDate } = req.query;
+
+      if (!startDate || !endDate) {
+        return res
+          .status(400)
+          .json({
+            success: false,
+            message: "Start and end dates are required",
+          });
+      }
+
+      const lessons = await this.lessonService.getLessonsByGroup(
+        groupId,
+        startDate,
+        endDate
+      );
+      res.status(200).json({ success: true, lessons });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
+
 export default LessonController;

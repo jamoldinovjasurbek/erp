@@ -1,11 +1,21 @@
 import mongoose from "mongoose";
+const { Schema } = mongoose;
 
-const attendanceSchema = new mongoose.Schema(
+const AttendanceSchema = Schema(
   {
-    lesson_id: { type: mongoose.Schema.Types.ObjectId, ref: "Lesson" },
-    created_by: { type: mongoose.Schema.Types.ObjectId, ref: "Staff" },
+    lesson_id: {
+      type: Schema.Types.ObjectId,
+      ref: "lesson",
+    },
+    created_by: {
+      type: Schema.Types.ObjectId,
+      ref: "staff",
+    },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    versionKey: false,
+  }
 );
-
-export const Attendance = mongoose.model("Attendance", attendanceSchema);
+const AttendanceModel = mongoose.model("attendance", AttendanceSchema);
+export default AttendanceModel;
